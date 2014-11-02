@@ -27,7 +27,7 @@
         color:#0CF;
         text-align:center;
 }
-input {
+#gameinput {
 	z-index:2;
 	position:absolute;
 	top:430px;
@@ -42,4 +42,13 @@ input {
 	font-size:80px;
         outline: none;
         background:transparent;
+}
+#hsdiv {
+    position:absolute;
+    top:430px;
+    margin-right:20%;
+    z-index:2;
+    background:transparant;
+    font-size:80px;
+    color:#00C;
 }
