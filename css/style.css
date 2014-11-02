@@ -1,0 +1,45 @@
+* {
+	margin:0px;
+	padding:0px;
+}
+#gameCanvas {
+}
+#scorebox {
+    z-index:2;
+    position:absolute;
+    top:40px;
+    left:40px;
+    font-size:20px;
+    text-align:right;
+    color:#OCF;
+}
+#sumbox {
+	z-index:2;
+	position:absolute;
+	top:330px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	height:80px;
+	width:320px;
+        font-size:80px;
+        color:#0CF;
+        text-align:center;
+}
+input {
+	z-index:2;
+	position:absolute;
+	top:430px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	height:80px;
+	width:136px;
+	color:#0CF;
+        border:0px;
+	font-size:80px;
+        outline: none;
+        background:transparent;
+}
