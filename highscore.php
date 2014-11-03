@@ -2,7 +2,7 @@
 
 include_once("conn.php");
 
-$results = $mysqli->query("
+$mysqli->query("
     INSERT INTO
 			highscore
 		(
@@ -12,10 +12,11 @@ $results = $mysqli->query("
 		)
 		VALUES
 		(
-			" . $_POST['name'] . ",
+			'" . $_POST['name'] . "',
 			'" . $_POST['score'] . "',
 			" . $_POST['difficulty'] . "
 		);
 	");
+print_r($_POST);
 $mysqli->close();
 ?>

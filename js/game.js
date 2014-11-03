@@ -146,12 +146,15 @@ $(document).ready(function () {
                     data: {
                         name: hsname,
                         score: score,
-                        difficulty: df,
+                        difficulty: df
                     },
-                    dataType: "json",
                     success: function (data) {
+                        console.log(data);
                         console.log('highscore saved!');
                     },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
                 });
             });
         }
