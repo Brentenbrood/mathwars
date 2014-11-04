@@ -1,22 +1,24 @@
 <?php
 
 include_once("conn.php");
-
+$name = mysqli_real_escape_string($mysqli,nl2br($_POST['name']));
+        
 $mysqli->query("
     INSERT INTO
 			highscore
 		(
 			name,
 			score,
-			difficulty
+			difficulty,
+                        date
 		)
 		VALUES
 		(
-			'" . $_POST['name'] . "',
+			'" . $name . "',
 			'" . $_POST['score'] . "',
-			" . $_POST['difficulty'] . "
+			" . $_POST['difficulty'] . ",
+                            NOW()
 		);
 	");
-print_r($_POST);
 $mysqli->close();
 ?>

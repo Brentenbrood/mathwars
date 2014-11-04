@@ -50,6 +50,12 @@ $(document).ready(function () {
     ship.y = 90;
     var score = 0;
     var answersum,
+            namehs1,
+            namehs2,
+            scorehs1,
+            scorehs2,
+            mathmin1,
+            mathmin2,
             mathnumber1,
             mathnumber2,
             difficulty;
@@ -61,18 +67,31 @@ $(document).ready(function () {
     conmaingame.addChild(bgimg, endragon, ship, aniexplosion);
 
     stage.addChild(constartmenu);
-
+    $.ajax({
+        url: 'getdata.php',
+        type: "GET",  
+        dataType: "json",
+        success: function(data) {
+           var array = data;
+           console.log(array);
+        },
+        error: function() {
+           console.log("An error occurred.");
+        }
+    });
     circle1.addEventListener("click", handleClickEasy);
     function handleClickEasy(event) {
         stage.removeChild(constartmenu);
         stage.addChild(conmaingame);
         $('body').append('<div id="scorebox"></div><div id="sumbox"></div><input id="gameinput" maxlength="3" type="text">');
+        mathmin1 = 1;
+        mathmin2 = 1;
         mathnumber1 = 10;
         mathnumber2 = 10;
         propositionallogic.push("+");
         difficulty = 1;
         console.log(difficulty);
-        startGame(mathnumber1, mathnumber2, difficulty);
+        startGame(mathnumber1, mathnumber2, difficulty,mathmin1,mathmin2);
     }
 
     circle2.addEventListener("click", handleClickMedium);
@@ -80,23 +99,25 @@ $(document).ready(function () {
         stage.removeChild(constartmenu);
         stage.addChild(conmaingame);
         $('body').append('<div id="scorebox"></div><div id="sumbox"></div><input id="gameinput" maxlength="3" type="text">');
+        mathmin1 = 1;
+        mathmin2 = 1;
         mathnumber1 = 6;
         mathnumber2 = 6;
         propositionallogic.push("*");
         difficulty = 2;
         console.log(difficulty);
-        startGame(mathnumber1, mathnumber2, difficulty);
+        startGame(mathnumber1, mathnumber2, difficulty,mathmin1,mathmin2);
     }
     createjs.Ticker.addEventListener("tick", handleTick);
     function handleTick(event) {
         stage.update();
     }
-    function startGame(mn1, mn2, df) {
+    function startGame(mn1, mn2, df, mm1, mm2) {
         var amountcorrect = 0;
         inputHandler(amountcorrect);
         createjs.Ticker.addEventListener("tick", animationTick);
         function animationTick(event) {
-            endragon.x += 20;
+            endragon.x += 1.5;
             if (endragon.x + 28 >= ship.x) {
                 $('input').remove();
                 $('#sumbox').html('Game Over');
@@ -149,7 +170,6 @@ $(document).ready(function () {
                         difficulty: df
                     },
                     success: function (data) {
-                        console.log(data);
                         console.log('highscore saved!');
                     },
                     error: function (xhr, textStatus, errorThrown) {
@@ -164,42 +184,96 @@ $(document).ready(function () {
             $('body').click(function () {
                 $('#gameinput').trigger('focus');
             });
-            var numberone = Math.floor(Math.random() * mn1) + 1;
-            var numbertwo = Math.floor(Math.random() * mn2) + 1;
+            var numberone = Math.floor(Math.random() * mn1) + mm1;
+            var numbertwo = Math.floor(Math.random() * mn2) + mm2;
             var rsymbol = propositionallogic[Math.floor(Math.random() * propositionallogic.length)];
             answersum = eval(Math.max(numberone, numbertwo) + rsymbol + Math.min(numberone, numbertwo));
             if (df == 1) {
                 switch (ac) {
                     case 10:
-                        mn1 = 15;
-                        mn2 = 15;
-                        propositionallogic.push("-");
+                        mn1 = 10;
+                        mn2 = 12;
+                        mm1 = 3;
+                        mm2 = 3;
                         break;
 
                     case 20:
-                        mn1 = 20;
-                        mn2 = 20;
+                        mn1 = 12;
+                        mn2 = 12;
+                        mm1 = 5;
+                        mm2 = 5;
                         break;
 
                     case 30:
+                        mn1 = 10;
+                        mn2 = 10;
+                        mm1 = 1;
+                        mm2 = 1;
+                        propositionallogic.push("-");
+                        break;
+                    case 40:
+                        mn1 = 12;
+                        mn2 = 12;
+                        mm1 = 3;
+                        mm2 = 3;
+                        break;
+                    case 50:
+                        mn1 = 14;
+                        mn2 = 14;
+                        mm1 = 5;
+                        mm2 = 5;
+                        break;
+                    case 60:
+                        mn1 = 18;
+                        mn2 = 18;
+                        mm1 = 8;
+                        mm2 = 8;
+                        break;
+                    case 80:
+                        mn1 = 24;
+                        mn2 = 24;
+                        mm1 = 10;
+                        mm2 = 10;
+                        break;
+                    case 100:
                         mn1 = 30;
                         mn2 = 30;
+                        mm1 = 15;
+                        mm2 = 15;
                         break;
                 }
             }
             if (df == 2) {
                 switch (ac) {
                     case 10:
-                        mn1 = 8;
-                        mn2 = 8;
+                        mn1 = 6;
+                        mn2 = 6;
+                        mm1 = 3;
+                        mm2 = 3;
                         break;
                     case 20:
-                        mn1 = 10;
-                        mn2 = 10;
+                        mn1 = 8;
+                        mn2 = 8;
+                        mm1 = 4;
+                        mm2 = 4;
                         break;
                     case 30:
+                        mn1 = 10;
+                        mn2 = 10;
+                        mm1 = 5;
+                        mm2 = 5;
+                        break;
+                    case 40:
+                        propositionallogic.push("-");
+                        propositionallogic.push("+");
+                        mm1 = 2;
+                        mm2 = 2;
+                        break;
+                    case 60:
                         mn1 = 12;
                         mn2 = 12;
+                        mm1 = 4;
+                        mm2 = 4;
                         break;
                 }
             }
