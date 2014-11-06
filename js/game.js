@@ -4,7 +4,7 @@ $(document).ready(function () {
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight;
     canvas.style.zIndex = 1;
-    canvas.style.position = "relative";
+    canvas.style.position = "fixed";
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
     createjs.Ticker.setFPS(30);
@@ -72,13 +72,28 @@ $(document).ready(function () {
         type: "GET",  
         dataType: "json",
         success: function(data) {
-           var array = data;
-           console.log(array);
+           var object = data;
+           displayHighscore(object);
         },
         error: function() {
            console.log("An error occurred.");
         }
     });
+    function displayHighscore(obj) {
+        $('body').prepend('<table class="highscore" id="highscore1"></table><table class="highscore" id="highscore2"></table>');
+        for (var i = 0; i < obj.length; i++) {
+            switch (obj[i].difficulty) {
+                case '1':
+                    $('#highscore1').append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].score+'</td></tr>');
+                    console.log(obj[i].name, "1");
+                    break;
+                case '2':
+                    $('#highscore2').append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].score+'</td></tr>');
+                    console.log(obj[i].name, "2");
+                    break;
+            }
+        }
+    }
     circle1.addEventListener("click", handleClickEasy);
     function handleClickEasy(event) {
         stage.removeChild(constartmenu);
@@ -196,14 +211,12 @@ $(document).ready(function () {
                         mm1 = 3;
                         mm2 = 3;
                         break;
-
                     case 20:
                         mn1 = 12;
                         mn2 = 12;
                         mm1 = 5;
                         mm2 = 5;
                         break;
-
                     case 30:
                         mn1 = 10;
                         mn2 = 10;

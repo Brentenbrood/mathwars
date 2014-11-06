@@ -52,3 +52,16 @@
     font-size:80px;
     color:#00C;
 }
+.highscore {
+    z-index:3;
+    position:fixed;
+    background-color:aliceblue;
+    float:left;
+    margin-top:20px;
+}
+#highscore1 {
+    margin-left:40px;
+}
+#highscore2 {
+    margin-left:180px;
+}
