@@ -85,20 +85,21 @@ $(document).ready(function () {
             switch (obj[i].difficulty) {
                 case '1':
                     $('#highscore1').append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].score+'</td></tr>');
-                    console.log(obj[i].name, "1");
                     break;
                 case '2':
                     $('#highscore2').append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].score+'</td></tr>');
-                    console.log(obj[i].name, "2");
                     break;
             }
         }
+        console.log(obj);
     }
     circle1.addEventListener("click", handleClickEasy);
     function handleClickEasy(event) {
         stage.removeChild(constartmenu);
         stage.addChild(conmaingame);
         $('body').append('<div id="scorebox"></div><div id="sumbox"></div><input id="gameinput" maxlength="3" type="text">');
+		$('#highscore1').remove();
+		$('#highscore2').remove();
         mathmin1 = 1;
         mathmin2 = 1;
         mathnumber1 = 10;
@@ -114,6 +115,8 @@ $(document).ready(function () {
         stage.removeChild(constartmenu);
         stage.addChild(conmaingame);
         $('body').append('<div id="scorebox"></div><div id="sumbox"></div><input id="gameinput" maxlength="3" type="text">');
+		$('#highscore1').remove();
+		$('#highscore2').remove();
         mathmin1 = 1;
         mathmin2 = 1;
         mathnumber1 = 6;
@@ -185,6 +188,7 @@ $(document).ready(function () {
                         difficulty: df
                     },
                     success: function (data) {
+						$('#hsdiv').remove();
                         console.log('highscore saved!');
                     },
                     error: function (xhr, textStatus, errorThrown) {

@@ -23,7 +23,12 @@
 	right: 0;
 	height:80px;
 	width:320px;
-        font-size:80px;
+    font-size:80px;
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
         color:#0CF;
         text-align:center;
 }
@@ -40,6 +45,11 @@
 	color:#0CF;
         border:0px;
 	font-size:80px;
+			text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
         outline: none;
         background:transparent;
 }
@@ -55,7 +65,7 @@
 .highscore {
     z-index:3;
     position:fixed;
-    background-color:aliceblue;
+    background-color:lightblue;
     float:left;
     margin-top:20px;
 }
